@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Evento 
 from .forms import EventoForm 
 from datetime import datetime, timedelta
@@ -27,8 +28,7 @@ def calendario(request):
     mes_anterior = (mes_atual - timedelta(days=1)).replace(day=1)
     mes_proximo = (mes_atual + timedelta(days=32)).replace(day=1)
     
-    # Ajuste: iniciar semana no DOMINGO
-    cal = Calendar(firstweekday=6)  # 6 = domingo
+    cal = Calendar(firstweekday=6) 
     semanas = []
     hoje = now().date()
 
@@ -84,7 +84,6 @@ def detalhe_evento(request, pk):
 def inscricao_evento(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
     if request.method == 'POST':
-        # Lógica para inscrever usuário no evento
         return redirect('eventos:detalhe', pk=pk)
     return render(request, 'eventos/inscricao.html', {'evento': evento})
 

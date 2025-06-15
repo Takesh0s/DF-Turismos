@@ -4,9 +4,8 @@ from . import views
 app_name = 'relatorios'
 
 urlpatterns = [
-    path('', views.painel_relatorios, name='painel'),
-    path('turistas/', views.relatorio_turistas, name='turistas'),
-    path('eventos/', views.relatorio_eventos, name='eventos'),
-    path('exportar/turistas/', views.exportar_turistas, name='exportar_turistas'),
-    path('exportar/eventos/', views.exportar_eventos, name='exportar_eventos'),
+    path('painel/', views.painel_relatorios, name='painel'),
+    path('painel/graficos/', views.graficos_relatorios, name='graficos'),
+    path('painel/visitantes/', views.relatorio_visitantes, name='visitantes'),
+    path('painel/receita/', views.relatorio_receita, name='receita'),
 ]

@@ -1,4 +1,4 @@
-/* Estilos Gerais */
+
 :root {
     --primary-color: #081a38;
     --secondary-color: #0d2b5c;
@@ -26,7 +26,6 @@ body {
     padding: 20px;
 }
 
-/* Header */
 .header {
     background-color: var(--primary-color);
     color: white;
@@ -47,7 +46,6 @@ body {
     gap: 10px;
 }
 
-/* Botões */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -107,7 +105,6 @@ body {
 .edit { background-color: var(--success-color); color: white; }
 .delete { background-color: var(--danger-color); color: white; }
 
-/* Cards */
 .card-list, .card-form, .card-detail, .card-confirm {
     background: white;
     border-radius: 8px;
@@ -125,7 +122,6 @@ body {
     gap: 10px;
 }
 
-/* Tabela */
 .turistas-table {
     width: 100%;
     border-collapse: collapse;
@@ -153,7 +149,6 @@ body {
     gap: 8px;
 }
 
-/* Formulário */
 .turista-form {
     margin-top: 20px;
 }
@@ -243,7 +238,6 @@ body {
     gap: 15px;
 }
 
-/* Confirmação */
 .confirm-message {
     background-color: #fff8e1;
     padding: 20px;
@@ -261,7 +255,6 @@ body {
     gap: 15px;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;

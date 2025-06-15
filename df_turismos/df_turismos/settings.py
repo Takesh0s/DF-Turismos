@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'relatorios.apps.RelatoriosConfig',
     'logs.apps.LogsConfig',
     'parques.apps.ParquesConfig',
+    'login.apps.LoginConfig',
+    'mapa.apps.MapaConfig',
+    'emergencia.apps.EmergenciaConfig',
+    'feiras.apps.FeirasConfig',
 ]
 
 MIDDLEWARE = [
@@ -63,9 +67,16 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_filters': 'relatorios.templatetags.custom_filters',
+            },
         },
     },
 ]
+
+LOGIN_URL = 'login:login'
+LOGIN_REDIRECT_URL = 'login:redirecionar_usuario' 
+LOGOUT_REDIRECT_URL = 'home'
 
 WSGI_APPLICATION = 'df_turismos.wsgi.application'
 
@@ -123,4 +134,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'usuarios.Usuario'
+AUTH_USER_MODEL = 'login.Colaborador'

@@ -4,7 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DF Turismos - {% block title %}{% endblock %}</title>
+    <title>DF Turismos {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% block extra_css %}{% endblock %}
     <style>
@@ -95,33 +97,13 @@
         }
       }
     </style>
-  </head>
+ </head>
   <body>
-    <header>
-      <div class="header-content">
-        <div class="logo-container">
-          <a href="{% url 'home' %}" class="logo-link">
-            <img
-              src="{% static 'images/catedral.png' %}"
-              alt="Logo DF Turismo"
-              class="logo-icon"
-            />
-            <h1>DF Turismos</h1>
-          </a>
-        </div>
-      </div>
-
-      <nav class="nav-links">
-        <a href="{% url 'turistas:cadastro' %}">Cadastro</a>
-        <a href="{% url 'eventos:lista' %}">Eventos</a>
-        <a href="{% url 'relatorios:painel' %}">Gráficos</a>
-      </nav>
-    </header>
+    {% include 'partials/header.html' %}
 
     <main>{% block content %}{% endblock %}</main>
 
-    <footer>
-      <p>&copy; {% now "Y" %} DF Turismos. Todos os direitos reservados</p>
-    </footer>
+    {% include 'partials/footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
