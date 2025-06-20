@@ -27,7 +27,7 @@ Um sistema web desenvolvido com Django para cadastro, gestão e visualização d
 
 ```bash
 git clone https://github.com/seu-usuario/projeto_df_turismos.git
-cd projeto_df_turismos
+cd df_turismos
 ```
 
 ### 2. Crie e ative um ambiente virtual
