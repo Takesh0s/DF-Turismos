@@ -34,7 +34,7 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exportDropdown{{ forloop.counter }}">
                     <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'png')">PNG</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'jpg')">JPG</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="exportTableToXLSX(this)">Excel</a></li>
                     <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'pdf')">PDF</a></li>
                 </ul>
             </div>
@@ -92,6 +92,8 @@
     {% endfor %}
 </div>
 
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
 <script>
 function exportChart(button, format) {
     const chartImg = button.closest('.grafico-bloco').querySelector('.chart-container img');
@@ -101,21 +103,16 @@ function exportChart(button, format) {
     }
 
     if (format === 'pdf') {
-     
         const imgData = chartImg.src;
         const pdf = new window.jspdf.jsPDF('landscape');
-      
         const width = pdf.internal.pageSize.getWidth();
         const height = pdf.internal.pageSize.getHeight();
-
         pdf.addImage(imgData, 'PNG', 0, 0, width, height);
         pdf.save(`relatorio_grafico_${Date.now()}.pdf`);
     } else {
-       
         let mime = 'image/png';
         if (format === 'jpg') mime = 'image/jpeg';
 
-       
         const link = document.createElement('a');
         link.href = chartImg.src;
         link.download = `relatorio_grafico_${Date.now()}.${format}`;
@@ -124,8 +121,25 @@ function exportChart(button, format) {
         document.body.removeChild(link);
     }
 }
+
+function exportTableToXLSX(button) {
+    const blocoTabela = button.closest('.grafico-bloco').nextElementSibling;
+    const table = blocoTabela.querySelector('table');
+
+    if (!table) {
+        alert('Tabela não encontrada para exportação.');
+        return;
+    }
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(wb, ws, "Receita");
+
+    XLSX.writeFile(wb, `dados_receita_${Date.now()}.xlsx`);
+}
 </script>
 {% endblock %}
+
 
 
 

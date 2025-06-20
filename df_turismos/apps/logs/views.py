@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import LogEntry  # Você precisará criar este modelo
+from .models import LogEntry  
 from django.http import HttpResponse
 import csv
 

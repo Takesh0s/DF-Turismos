@@ -24,7 +24,6 @@
     </div>
 
     {% for grafico in graficos %}
-
     <div class="grafico-bloco shadow-lg mx-auto mb-4" style="max-width: 700px;">
         <div class="grafico-bloco-header d-flex justify-content-between align-items-center px-3 py-2 bg-primary text-white rounded-top">
             <h4 class="mb-0 d-flex align-items-center gap-2">
@@ -36,7 +35,7 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exportDropdown">
                     <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'png')">PNG</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'jpg')">JPG</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="exportTableToXLSX(this)">Excel</a></li>
                     <li><a class="dropdown-item" href="#" onclick="exportChart(this, 'pdf')">PDF</a></li>
                 </ul>
             </div>
@@ -102,9 +101,10 @@
     {% endfor %}
 </div>
 
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
 <script>
 function exportChart(button, format) {
-
     const chartContainer = button.closest('.grafico-bloco').querySelector('.chart-container img');
     if (!chartContainer) {
         alert('Nenhum gráfico disponível para exportação');
@@ -118,8 +118,25 @@ function exportChart(button, format) {
     link.click();
     document.body.removeChild(link);
 }
+
+function exportTableToXLSX(button) {
+    const bloco = button.closest('.grafico-bloco').nextElementSibling;
+    const table = bloco.querySelector('table');
+
+    if (!table) {
+        alert('Tabela não encontrada para exportação.');
+        return;
+    }
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(wb, ws, "Dados");
+
+    XLSX.writeFile(wb, "dados_grafico.xlsx");
+}
 </script>
 {% endblock %}
+
 
 
 

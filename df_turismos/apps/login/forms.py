@@ -6,7 +6,7 @@ class CadastroColaboradorForm(UserCreationForm):
     tipo = forms.ChoiceField(
         choices=Colaborador.TIPO_CHOICES,
         widget=forms.RadioSelect,
-        label="Você é servidor da Secretaria de Turismo do GDF ou colaborador?"
+        label="Tipo de usuário"
     )
 
     class Meta:

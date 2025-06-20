@@ -72,7 +72,7 @@
             <i class="fas fa-arrow-left"></i> Voltar para Lista
         </a>
         <div class="d-flex gap-2">
-            <a href="?mes={{ mes_anterior|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary">
+            <a href="?mes={{ mes_anterior|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary btn-no-blue">
                 <i class="fas fa-chevron-left"></i> Mês Anterior
             </a>
             <a href="?mes={{ mes_proximo|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary">

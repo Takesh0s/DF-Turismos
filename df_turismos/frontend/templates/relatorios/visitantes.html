@@ -35,7 +35,7 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="exportDropdown{{ forloop.counter }}">
                     <li><a class="dropdown-item" href="#" onclick="exportChart('chart-img-{{ forloop.counter }}', 'png')">PNG</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="exportChart('chart-img-{{ forloop.counter }}', 'jpg')">JPG</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="exportTableToXLSX(this)">Excel</a></li>
                     <li><a class="dropdown-item" href="#" onclick="exportChart('chart-img-{{ forloop.counter }}', 'pdf')">PDF</a></li>
                 </ul>
             </div>
@@ -50,7 +50,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="panel shadow-lg mb-5">
         <div class="panel-header">
@@ -102,6 +101,8 @@
     {% endfor %}
 </div>
 
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
 <script>
 function exportChart(imgId, format) {
     const imgElement = document.getElementById(imgId);
@@ -117,8 +118,25 @@ function exportChart(imgId, format) {
     link.click();
     document.body.removeChild(link);
 }
+
+function exportTableToXLSX(button) {
+    const panel = button.closest('.panel').nextElementSibling;
+    const table = panel.querySelector('table');
+
+    if (!table) {
+        alert('Tabela não encontrada para exportação.');
+        return;
+    }
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(wb, ws, "Dados");
+
+    XLSX.writeFile(wb, "dados_visitantes.xlsx");
+}
 </script>
 {% endblock %}
+
 
 
 
