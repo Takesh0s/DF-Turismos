@@ -10,9 +10,9 @@ def novo_turista(request):
     if request.method == 'POST':
         form = TuristaForm(request.POST)
         if form.is_valid():
-            turista = form.save(commit=False)  # cria o objeto mas não salva ainda
-            turista.usuario = request.user     # atribui o usuário logado
-            turista.save()                     # salva no banco
+            turista = form.save(commit=False)  
+            turista.usuario = request.user     
+            turista.save()                     
             return redirect('turistas:lista')
     else:
         form = TuristaForm()

@@ -1,24 +1,23 @@
-{% extends "base.html" %}
+{% extends "base_turista.html" %}
 {% load static %}
 
 {% block title %}Calendário de Eventos - DF Turismos{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-calendario">
     <h2 class="my-4 text-center">
         <i class="fas fa-calendar"></i> Calendário de Eventos
     </h2>
 
-    <!-- Mês e ano centralizados -->
     <h4 class="text-center mb-4">
         {{ mes_atual|date:"F \\d\\e Y" }}
     </h4>
 
     <div class="card mb-4">
         <div class="card-body">
-            <!-- Filtros por tipo de evento -->
-            <div class="mb-4 text-center">
-                <h5>Filtrar por tipo:</h5>
+
+            <div class="filter-container mb-4">
+                <h5 class="mb-2">Filtrar por tipo:</h5>
                 <div class="btn-group" role="group">
                     <a href="?" class="btn btn-outline-secondary {% if not tipo_selecionado %}active{% endif %}">Todos</a>
                     {% for tipo in tipos_evento %}
@@ -29,10 +28,9 @@
                 </div>
             </div>
 
-            <!-- Calendário -->
             <div class="table-responsive">
                 <table class="table table-bordered calendar-table text-center">
-                    <thead class="thead-light">
+                    <thead>
                         <tr>
                             <th>Dom</th>
                             <th>Seg</th>
@@ -69,16 +67,15 @@
         </div>
     </div>
 
-    <!-- Navegação entre meses -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="{% url 'eventos:lista' %}" class="btn btn-secondary">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <a href="{% url 'eventos:lista' %}" class="btn btn-secondary mb-2">
             <i class="fas fa-arrow-left"></i> Voltar para Lista
         </a>
-        <div>
+        <div class="d-flex gap-2">
             <a href="?mes={{ mes_anterior|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary">
                 <i class="fas fa-chevron-left"></i> Mês Anterior
             </a>
-            <a href="?mes={{ mes_proximo|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary ml-2">
+            <a href="?mes={{ mes_proximo|date:'Y-m' }}{% if tipo_selecionado %}&tipo={{ tipo_selecionado }}{% endif %}" class="btn btn-outline-primary">
                 Próximo Mês <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -87,53 +84,19 @@
 {% endblock %}
 
 {% block extra_css %}
-<style>
-    .calendar-table {
-        table-layout: fixed;
-    }
-    .calendar-table td {
-        height: 120px;
-        vertical-align: top;
-        position: relative;
-    }
-    .other-month {
-        background-color: #f8f9fa;
-        color: #6c757d;
-    }
-    .today {
-        background-color: #fff3cd;
-    }
-    .day-number {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        font-weight: bold;
-    }
-    .has-events {
-        background-color: #f0f8ff;
-    }
-    .event-item {
-        font-size: 0.75em;
-        margin-top: 25px;
-        color: white;
-    }
-    .evento-cul { background-color: #3498db; }  /* Cultural - Azul */
-    .evento-mus { background-color: #e74c3c; }  /* Musical - Vermelho */
-    .evento-esp { background-color: #2ecc71; }  /* Esportivo - Verde */
-    .evento-gast { background-color: #f39c12; } /* Gastronômico - Laranja */
-</style>
+<link rel="stylesheet" href="{% static 'css/eventos/calendario.css' %}">
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    // Destaque para eventos passados (caso queira adaptar depois)
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.event-item').forEach(function(item) {
-            if(item.textContent.includes('(Passado)')) {
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.event-item').forEach(function (item) {
+            if (item.textContent.includes('(Passado)')) {
                 item.style.opacity = '0.6';
             }
         });
     });
 </script>
 {% endblock %}
+
 

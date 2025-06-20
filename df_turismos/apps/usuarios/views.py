@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import RegistroForm  # Você precisará criar este formulário
+from .forms import RegistroForm 
 
 def registro(request):
     if request.method == 'POST':

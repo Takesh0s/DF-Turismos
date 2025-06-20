@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DF Turismos - {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/turistas/cadastro.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <nav>
                 <a href="{% url 'turistas:lista' %}" class="btn"><i class="fas fa-list"></i> Lista</a>
                 <a href="{% url 'turistas:cadastro' %}" class="btn"><i class="fas fa-plus"></i> Novo</a>
-                <a href="{% url 'home' %}" class="btn">Página Inicial</a>
+                <a href="{% url 'login:painel_admin' %}" class="btn">Página Inicial</a>
             </nav>
         </header>
 
