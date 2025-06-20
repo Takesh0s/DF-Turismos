@@ -7,7 +7,7 @@ Um sistema web desenvolvido com Django para cadastro, gestão e visualização d
 - Cadastro e listagem de turistas
 - Cadastro de parques e feiras do DF
 - Localização de Pontos turísticos no Google Maps
-- -Relatórios e gráficos disponíveis para Colaboradores
+- Relatórios e gráficos disponíveis para Colaboradores
 - Interface estilizada com CSS e FontAwesome
 
 ## 🚀 Tecnologias Utilizadas
