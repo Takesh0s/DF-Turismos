@@ -5,18 +5,18 @@ Um sistema web desenvolvido com Django para cadastro, gestão e visualização d
 ## 📚 Funcionalidades
 
 - Cadastro e listagem de turistas
-- Visualização de detalhes de cada turista
-- Cadastro de parques do DF
-- Busca interativa de parques por nome
-- Link direto para localização no Google Maps
+- Cadastro de parques e feiras do DF
+- Localização de Pontos turísticos no Google Maps
+- -Relatórios e gráficos disponíveis para Colaboradores
 - Interface estilizada com CSS e FontAwesome
 
 ## 🚀 Tecnologias Utilizadas
 
-- Python 3.x
-- Django 4.x
+- Python 3.13.2
+- Django 5.2.2
 - HTML5 + CSS3
-- JavaScript (busca dinâmica)
+- Django REST Framework (para a criação de APIs)
+- Matplotlib
 - FontAwesome (ícones)
 
 ---
