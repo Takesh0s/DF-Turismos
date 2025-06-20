@@ -31,3 +31,10 @@ class Evento(models.Model):
     @property
     def is_passado(self):
         return self.data.date() < date.today()
+    
+class Inscricao(models.Model):
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name='inscricoes')
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20)
+    criado_em = models.DateTimeField(auto_now_add=True)    

@@ -19,7 +19,7 @@ class LogEntry(models.Model):
         on_delete=models.SET_NULL, 
         null=True, 
         blank=True,
-        related_name='logs_usuario'  # Adicionado related_name único
+        related_name='logs_usuario' 
     )
     acao = models.CharField(max_length=7, choices=TIPOS_ACAO)
     modelo = models.CharField(max_length=50)
@@ -32,7 +32,7 @@ class LogEntry(models.Model):
         verbose_name = 'Entrada de Log'
         verbose_name_plural = 'Logs'
         ordering = ['-data_hora']
-        db_table = 'logs_entry'  # Opcional: muda o nome da tabela no banco
+        db_table = 'logs_entry'
 
     def __str__(self):
         return f"{self.get_acao_display()} em {self.modelo} por {self.usuario} em {self.data_hora.strftime('%d/%m/%Y %H:%M')}"

@@ -11,7 +11,7 @@ def novo_turista(request):
         form = TuristaForm(request.POST)
         if form.is_valid():
             turista = form.save(commit=False)  
-            turista.usuario = request.user     
+            turista.usuario = request.user  
             turista.save()                     
             return redirect('turistas:lista')
     else:

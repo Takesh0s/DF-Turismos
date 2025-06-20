@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Evento 
+from .models import Evento, Inscricao 
 from .forms import EventoForm 
 from datetime import datetime, timedelta
 from calendar import Calendar
@@ -83,8 +82,22 @@ def detalhe_evento(request, pk):
 
 def inscricao_evento(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
+
     if request.method == 'POST':
-        return redirect('eventos:detalhe', pk=pk)
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
+
+        Inscricao.objects.create(
+            evento=evento,
+            nome=nome,
+            email=email,
+            telefone=telefone
+        )
+
+        messages.success(request, 'Inscrição realizada com sucesso!')
+        return redirect('eventos:lista')
+
     return render(request, 'eventos/inscricao.html', {'evento': evento})
 
 

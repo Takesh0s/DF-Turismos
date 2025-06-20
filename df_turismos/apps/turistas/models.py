@@ -1,8 +1,8 @@
 from django.db import models
-from usuarios.models import Usuario  # Assumindo que você tem um modelo Usuario personalizado
+from django.contrib.auth import get_user_model
 
 class Turista(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='turistas')
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='turistas')
     nome_completo = models.CharField(max_length=100)
     email = models.EmailField()
     telefone = models.CharField(max_length=15)

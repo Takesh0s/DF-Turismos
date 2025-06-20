@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.forms import ValidationError
 
 class DadosTurismoAnual(models.Model):
-    """Armazena dados anuais de turismo no DF"""
     ano = models.PositiveIntegerField(
         unique=True,
         verbose_name="Ano de referência",
@@ -27,8 +26,7 @@ class DadosTurismoAnual(models.Model):
         verbose_name="Gasto médio por viagem (R$)",
         help_text="Gasto médio por viagem com pernoite"
     )
-    
-    # Motivações das viagens (em percentual)
+
     motivo_lazer = models.FloatField(
         verbose_name="Viagens por lazer (%)",
         validators=[MinValueValidator(0), MaxValueValidator(100)]
@@ -45,8 +43,7 @@ class DadosTurismoAnual(models.Model):
         verbose_name="Outros motivos de viagem (%)",
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    
-    # Meios de transporte (em percentual)
+
     transporte_carro = models.FloatField(
         verbose_name="Uso de carro particular/empresa (%)",
         validators=[MinValueValidator(0), MaxValueValidator(100)]
@@ -67,22 +64,19 @@ class DadosTurismoAnual(models.Model):
         verbose_name="Outros meios de transporte (%)",
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    
-    # Turismo internacional
+
     turistas_internacionais = models.PositiveIntegerField(
         verbose_name="Turistas estrangeiros (em milhares)"
     )
     variacao_internacional = models.FloatField(
         verbose_name="Variação turismo internacional (%)"
     )
-    
-    # Hotelaria
+
     ocupacao_hoteleira = models.FloatField(
         verbose_name="Taxa de ocupação hoteleira (%)",
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    
-    # Impacto econômico
+
     contribuicao_pib = models.FloatField(
         verbose_name="Contribuição para o PIB do DF (%)"
     )
@@ -91,8 +85,7 @@ class DadosTurismoAnual(models.Model):
         decimal_places=2,
         verbose_name="Arrecadação de ISS (em milhões R$)"
     )
-    
-    # Metadados
+   
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     
@@ -105,12 +98,10 @@ class DadosTurismoAnual(models.Model):
         return f"Dados de Turismo DF - {self.ano}"
     
     def save(self, *args, **kwargs):
-        # Garante que a soma dos percentuais de motivos e transportes seja 100%
         self.full_clean()
         super().save(*args, **kwargs)
     
     def clean(self):
-        # Validação para motivos de viagem
         total_motivos = sum([
             self.motivo_lazer,
             self.motivo_visita,
@@ -119,8 +110,7 @@ class DadosTurismoAnual(models.Model):
         ])
         if round(total_motivos, 1) != 100:
             raise ValidationError("A soma dos percentuais de motivos de viagem deve ser 100%")
-        
-        # Validação para meios de transporte
+
         total_transportes = sum([
             self.transporte_carro,
             self.transporte_aviao,
@@ -132,7 +122,6 @@ class DadosTurismoAnual(models.Model):
             raise ValidationError("A soma dos percentuais de meios de transporte deve ser 100%")
 
 class PaisEmissor(models.Model):
-    """Países que mais enviam turistas para o DF"""
     nome = models.CharField(max_length=100, unique=True)
     posicao_ranking = models.PositiveIntegerField()
     percentual = models.FloatField(
@@ -149,7 +138,6 @@ class PaisEmissor(models.Model):
         return f"{self.posicao_ranking}º - {self.nome} ({self.percentual}%)"
 
 class RotaAerea(models.Model):
-    """Voos internacionais disponíveis para o DF"""
     destino = models.CharField(max_length=100)
     pais = models.CharField(max_length=100)
     ativa = models.BooleanField(default=True)
@@ -165,7 +153,6 @@ class RotaAerea(models.Model):
         return f"Voo para {self.destino}, {self.pais}"
 
 class EventoDestaque(models.Model):
-    """Eventos que impulsionaram o turismo no DF"""
     TIPOS_EVENTO = [
         ('FEIRA', 'Feira/Exposição'),
         ('ESPORTE', 'Evento Esportivo'),
